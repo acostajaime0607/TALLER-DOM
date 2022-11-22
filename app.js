@@ -247,3 +247,14 @@ const actualizarProducto = (e) => {
   pintarCard(arrayTemp);
   limpiarFormulario();
 };
+
+const limpiarFormulario = () => {
+  document.getElementById("idproducto").value = "";
+  document.getElementById("name").value = "";
+  document.getElementById("precio").value = "";
+  document.getElementById("image").value = "";
+  document.getElementById("idproducto").hidden = true;
+  document.getElementById("labelid").hidden = true;
+  document.getElementById("editar").hidden = true;
+  document.getElementById("send").hidden = false;
+};
