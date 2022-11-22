@@ -1,10 +1,41 @@
 const app = document.getElementById("productos");
+const items = document.getElementById("items");
+const footer = document.getElementById("footer");
+const send = document.getElementById("send");
+const editar = document.getElementById("editar");
+
+const fragment = document.createDocumentFragment();
+const templateProductos = document.getElementById("template-productos").content;
+const templateItems = document.getElementById("template-items").content;
+const templateFooter = document.getElementById("template-footer").content;
+
+const carrito = {};
+let arrayTemp = [];
+let idEditar = null;
+
+items.addEventListener("click", (e) => {
+  btnActions(e);
+});
 
 document.addEventListener("DOMContentLoaded", (e) => {
   fetchData();
   document.getElementById("editar").hidden = true;
   document.getElementById("idproducto").hidden = true;
   document.getElementById("labelid").hidden = true;
+});
+
+app.addEventListener("click", (e) => {
+  agregarCarrito(e);
+  eliminarProducto(e);
+  ProductoAactualizar(e);
+});
+
+send.addEventListener("click", (e) => {
+  crearNewProducto();
+});
+
+editar.addEventListener("click", (e) => {
+  actualizarProducto();
 });
 
 const fetchData = async () => {
