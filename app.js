@@ -173,3 +173,14 @@ const crearNewProducto = () => {
   pintarCard(arrayTemp);
   limpiarFormulario();
 };
+
+const eliminarProducto = async (e) => {
+  if (e.target.classList.contains("btn-danger")) {
+    app.innerHTML = "";
+    console.log(e.target.dataset.id);
+    arrayTemp = await arrayTemp.filter(
+      (data) => data.id !== Number(e.target.dataset.id)
+    );
+    pintarCard(arrayTemp);
+  }
+};
