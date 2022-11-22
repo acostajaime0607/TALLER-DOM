@@ -50,3 +50,48 @@ const pintarCard = (data) => {
   });
   app.appendChild(fragment);
 };
+
+const agregarCarrito = (e) => {
+  if (e.target.classList.contains("btn-dark")) {
+    setCarriro(e.target.parentElement);
+  }
+};
+
+const setCarriro = (data) => {
+  llenarCarrito(data);
+};
+
+const llenarCarrito = (data) => {
+  const producto = {
+    id: data.querySelector("button").dataset.id,
+    name: data.querySelector("h5").textContent,
+    precio: data.querySelector("p").textContent,
+    cantidad: 1,
+  };
+
+  if (carrito.hasOwnProperty(producto.id)) {
+    producto.cantidad = carrito[producto.id].cantidad + 1;
+  }
+
+  carrito[producto.id] = { ...producto };
+  pintarCarro();
+};
+
+const pintarCarro = () => {
+  items.innerHTML = "";
+  Object.values(carrito).forEach((data) => {
+    templateItems.querySelector("th").textContent = data.id;
+    templateItems.querySelectorAll("td")[0].textContent = data.name;
+    templateItems.querySelectorAll("td")[1].textContent = data.cantidad;
+    templateItems.querySelector("span").textContent =
+      data.precio * data.cantidad;
+
+    templateItems.querySelector(".btn-info").dataset.id = data.id;
+    templateItems.querySelector(".btn-danger").dataset.id = data.id;
+    const clone = templateItems.cloneNode(true);
+    fragment.appendChild(clone);
+  });
+
+  items.appendChild(fragment);
+  pintarFooter();
+};
