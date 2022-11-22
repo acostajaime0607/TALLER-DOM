@@ -95,3 +95,29 @@ const pintarCarro = () => {
   items.appendChild(fragment);
   pintarFooter();
 };
+
+const pintarFooter = () => {
+  footer.innerHTML = "";
+
+  const cantidad_productos = Object.values(carrito).reduce(
+    (acc, { cantidad }) => acc + cantidad,
+    0
+  );
+
+  const valor_total = Object.values(carrito).reduce(
+    (acc, { cantidad, precio }) => acc + cantidad * precio,
+    0
+  );
+
+  templateFooter.querySelectorAll("td")[0].textContent = cantidad_productos;
+  templateFooter.querySelectorAll("span")[0].textContent = valor_total;
+
+  const boton = document.querySelector("vaciar-todo");
+  //   boton.addEventListener("click", () => {
+  //     carrito = {};
+  //   });
+
+  const clone = templateFooter.cloneNode(true);
+  fragment.appendChild(clone);
+  footer.appendChild(fragment);
+};
