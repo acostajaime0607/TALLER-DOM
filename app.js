@@ -121,3 +121,24 @@ const pintarFooter = () => {
   fragment.appendChild(clone);
   footer.appendChild(fragment);
 };
+
+const btnActions = (e) => {
+  if (e.target.classList.contains("btn-info")) {
+    const producto = carrito[e.target.dataset.id];
+    producto.cantidad++;
+    carrito[e.target.dataset.id] = { ...producto };
+  }
+
+  if (e.target.classList.contains("btn-danger")) {
+    const producto = carrito[e.target.dataset.id];
+
+    producto.cantidad--;
+    if (producto.cantidad === 0) {
+      delete carrito[e.target.dataset.id];
+    } else {
+      carrito[e.target.dataset.id] = { ...producto };
+    }
+  }
+
+  pintarCarro();
+};
