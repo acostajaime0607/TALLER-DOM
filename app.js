@@ -184,3 +184,66 @@ const eliminarProducto = async (e) => {
     pintarCard(arrayTemp);
   }
 };
+
+const ProductoAactualizar = async (e) => {
+  if (e.target.classList.contains("btn-info")) {
+    document.getElementById("send").hidden = true;
+    document.getElementById("editar").hidden = false;
+    document.getElementById("idproducto").hidden = false;
+    document.getElementById("labelid").hidden = false;
+
+    const data = arrayTemp.find(
+      (data) => data.id === Number(e.target.dataset.id)
+    );
+
+    if (data) {
+      document.getElementById("idproducto").value = data.id;
+      document.getElementById("name").value = data.name;
+      document.getElementById("precio").value = data.precio;
+      document.getElementById("image").value = data.image;
+      idEditar = data.id;
+    }
+  }
+};
+
+const actualizarProducto = (e) => {
+  app.innerHTML = "";
+  const id = document.getElementById("idproducto").value;
+  const name = document.getElementById("name").value;
+  const precio = document.getElementById("precio").value;
+  const image = document.getElementById("image").value;
+
+  if (id === "") {
+    alert("Hubo un error, no se encontro el id del producto");
+    return;
+  }
+
+  if (name === "") {
+    alert("El nombre es un campo obligatorio");
+    return;
+  }
+
+  if (precio === "") {
+    alert("El precio es un campo obligatorio");
+    return;
+  }
+
+  if (image === "") {
+    alert("La imagen es un campo obligatorio");
+    return;
+  }
+
+  const dataUpadte = {
+    id: id,
+    name: name,
+    precio: precio,
+    image: image,
+  };
+
+  arrayTemp = arrayTemp.map((data) =>
+    data.id === Number(id) ? (data = dataUpadte) : data
+  );
+
+  pintarCard(arrayTemp);
+  limpiarFormulario();
+};
