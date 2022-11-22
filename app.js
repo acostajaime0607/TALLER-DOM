@@ -142,3 +142,34 @@ const btnActions = (e) => {
 
   pintarCarro();
 };
+
+const crearNewProducto = () => {
+  const name = document.getElementById("name").value;
+  const precio = document.getElementById("precio").value;
+  const image = document.getElementById("image").value;
+
+  if (name === "") {
+    alert("El nombre es un campo obligatorio");
+    return;
+  }
+
+  if (precio === "") {
+    alert("El precio es un campo obligatorio");
+    return;
+  }
+
+  if (image === "") {
+    alert("La imagen es un campo obligatorio");
+    return;
+  }
+
+  const data = {
+    id: getRandomInt(1000, 100000),
+    name: name,
+    precio: precio,
+    image: image,
+  };
+  arrayTemp = [...arrayTemp, data];
+  pintarCard(arrayTemp);
+  limpiarFormulario();
+};
